@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <style>
+        .card {
+        margin: 150px auto;
+        }
+    </style>
+    <body>
+        <div class="card text-center text-dark bg-light mb-3" style="max-width: 25rem;">
+            <div class="card-header text-light bg-dark"><h2 class="display-4">Log In</h2></div>
+            <div class="card-body text-light bg-secondary">
+                <form method="post" class="lead">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <u><a style="color:white;" class="nav-link" href="{% url 'password_reset' %}">Reset Password</a></u><br>
+                <button type="submi t" class="btn btn-primary">Sign in</button>
+                </form>
+            </div>
+        </div>
+    </body>
+{% endblock %}

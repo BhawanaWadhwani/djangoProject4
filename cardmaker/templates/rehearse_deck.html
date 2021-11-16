@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            {% for card in list_of_cards %}
+{#                for tap is used here #}
+                <div class="rehearse_card">
+                    <div class="card-deck" style="height: 35rem;">
+                        <div class="card text-center card-header text-light bg-dark" style="width: 45rem;">
+                            <div class="card-img-overlay">
+                                <h4 class="card-title-question">Q: {{card.question}} </h4>
+{#                                variables are accessed here #}
+                                <h5 class="card-text-answer">A: {{card.answer}}</h5>
+                            </div><br><br>
+                            <div class="card-body ">
+                                <img src="{% static "images/Questions-bro.svg" %}" class="card-img-top" alt="..." style="opacity: .4; height: 20rem" >
+                            </div>
+                            <div class="card-footer bg-light">
+                                <small class="text-muted">
+                                    {{card.deck.title}} · {{ card.deck.subject }}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <br>
+        <div class="row">
+            <div class="col text-center">
+                <button type="button" onclick="showPrevCard();" name="previous" class="btn btn-info btn-sm">❮</button>
+                <button type="button" onclick="flipCard();" name="flip" class="btn btn-success btn-md">Flip</button>
+                <button type="button" onclick="showNextCard();" name="next" class="btn btn-info btn-sm">❯</button>
+{#                these functions are contained in javascript file #}
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/rehearse.js' %}">
+    </script>
+{% endblock %}

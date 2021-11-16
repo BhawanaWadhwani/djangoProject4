@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <div class="jumbotron bg-cover" style="background-image: linear-gradient(to bottom, rgba(255,255,255,0.6) 0%,rgba(255,255,255,0.9) 100%), url(https://thumbs.dreamstime.com/b/hand-drawn-set-college-school-study-element-good-grades-concept-excellent-grades-education-student-pupil-study-172184908.jpg)">
+            <center><b class="display-1">{{deck.title}}</b></center><br>
+            <div class="overflow-auto" style="height: 100px">
+                <h5 class="display-6">{{deck.description}}</h5><br>
+            </div>
+            <table style="border: 0">
+            <tr>
+            <td style="width: 730px"><b class="display-6" style="font-size: 22px">By {{deck.creator}} in {{deck.subject|truncatechars:40}}</b><br></td>
+            {% if user.is_authenticated %}
+                {% if user == deck.creator %}
+                    <td><a class="btn btn-info btn-sm" href="/deck/{{deck.id}}" role="button">Edit Cards</a></td>
+                {% endif %}
+            {% endif %}
+            <td><a class="btn btn-info btn-sm" href="/deck/rehearse/{{deck.id}}" role="button">Rehearse Cards</a></td>
+            {% if user.is_authenticated %}
+                <td><a class="btn btn-success btn-sm" href="/deck/save/{{deck.id}}" role="button">Save for Study</a></td>
+            {% endif %}
+            </tr>
+            </table>
+        </div>
+{#        <div class="card-rows">#}
+{#            {% for card in list_of_cards %}#}
+{#          here we have for tag, and this will itearate in all the cards of the deck#}
+{#                <div class="card">#}
+{#                    <div class="card-body">#}
+{#                        <h5 class="card-title">{{ card.question }}  </h5>#}
+{#                        <p class="card-text">{{card.answer}}</p>#}
+{#                    </div>#}
+{#                    <div class="card-footer">#}
+{#                        <small class="text-muted">#}
+{#                             {{card.deck}}#}
+{#                            · {{card.deck.creator}}#}
+{#                            {% if user.is_authenticated %}#}
+{#                                {% if user == deck.creator %}#}
+{#                                · <a href="/deck/{{card.deck.id}}">Edit</a>#}
+{#                                · <a href="/card/delete/{{ card.deck.id }}/{{card.id}}/">Delete</a>#}
+{#                                {% endif %}#}
+{#                            {% endif %}#}
+{#                        </small>#}
+{#                    </div>#}
+{#                </div>#}
+{#            {% endfor %}#}
+{#        </div>#}
+    </div>
+    <hr>
+{% endblock %}

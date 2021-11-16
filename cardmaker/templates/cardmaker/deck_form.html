@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-4">Create a new Deck</h1>
+            <p class="lead">Enter details below to keep your system neatly organized.</p>
+            <hr class="my-4">
+            <p>After creation, you will be able to start adding flashcards.</p>
+            <form method="POST">
+               {% csrf_token %}
+               <div class="form-group">
+                    {{ form.title }}
+                    <br>
+                    {{form.subject }}
+                    <br>
+                    {{form.description }}
+                    <br>
+                    <button type="submit" class="btn btn-primary btn-m">Create</button>
+               </div>
+             </form>
+        </div>
+    </div>
+{% endblock %}

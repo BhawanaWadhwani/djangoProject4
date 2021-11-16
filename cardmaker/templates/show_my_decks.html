@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <div class="card-columns">
+            {% for deck in list_of_decks %}
+                {% if user == deck.creator %}
+                    <div class="card">
+                        <a href="/deck/show/{{deck.id}}" >
+                            <img src="{% static "images/Learning.svg" %}" class="card-img-top" alt="...">
+                        </a>
+                        <div class="card-body text-dark bg-light">
+                            <h5 class="card-title">
+                                <a href="/deck/show/{{deck.id}}">
+                                    {{ deck.title }}
+                                </a>
+                                <a href="/deck/show/{{deck.id}}">
+                                    <span class="badge badge-primary">{{deck.card_set.all|length}}</span>
+                                </a>
+                            </h5>
+                            <p class="card-text">{{deck.description|truncatechars:25}}</p>
+                            <a class="btn btn-outline-secondary btn-sm btn-block" href="/deck/show/{{deck.id}}" role="button">
+                                Show
+                            </a>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted"> by {{deck.creator}}
+                                · {{ deck.subject|truncatechars:20 }}
+                                {% if user.is_authenticated %}
+                                    · <a href="/deck/{{deck.id}}">Edit</a>
+                                    · <a href="/deck/delete/{{deck.id}}/">Delete</a>
+                                {% endif %}
+                            </small>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <hr>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% block content %}
+        {% if user %}
+            <center>
+                {{ user }}
+                <p>Reset Password Page</p>
+            </center>
+        {% endif %}
+    {% endblock %}
+
+</body>
+</html>
