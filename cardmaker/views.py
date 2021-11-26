@@ -14,6 +14,7 @@ def show_my_decks(request):
     context = {'list_of_decks': d_list}
     return render(request, 'show_my_decks.html', context)
 
+# git ka comment hai
 
 def delete_card(request, deck_id, card_id):
     card_to_delete = Card.objects.get(id=card_id)
