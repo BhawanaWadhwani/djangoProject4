@@ -17,6 +17,10 @@ urlpatterns = [
     path('studyset/', views.show_my_studyset, name='show_my_studyset'),
     path('studyset/remove/<int:studentdeck_id>/', views.remove_from_studyset, name= 'remove_from_studyset'),
     path('deck/test/<int:deck_id>', views.test, name='test'),
+    path('deck/rehearse/<int:deck_id>', views.rehearse_deck, name="rehearse"),
     path('settings/', views.show_user, name="setting"),
-    path('deck/rehearse/<int:deck_id>/', views.rehearse_deck, name="rehearse_deck"),
+    path('forum/', views.forum, name="forum"),
+    path("discussion/<int:myid>/", views.discussion, name="Discussions"),
+    # path('forum/', views.forum, name="forum"),
+    #path('deck/rehearse/<int:deck_id>/', views.rehearse_deck, name="rehearse_deck"),
 ]

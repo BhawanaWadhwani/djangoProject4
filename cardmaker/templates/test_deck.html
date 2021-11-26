@@ -3,7 +3,15 @@
 {% load static %}
 
 {% block content %}
+
     <p style="text-align: center;">Correct: <b style="color: green" id="correct"></b> &emsp;&emsp; Incorrect: <b style="color: red" id="incorrect"></b> &emsp;&emsp; Max Score: <b id="count"></b> &emsp;&emsp; Progress: <b id="len2"></b>/<b id="len"></b></p>
+    <div id="test_score">
+        <form align="center">
+{#            input field and submit#}
+            <input type="text" id="scoring" readonly>
+            <button type="submit" class="save btn btn-primary" >Analyse your Previous Score</button>
+        </form>
+    </div>
     <div class="container" id="test">
         <div class="row">
             {% for card in list_of_cards %}
@@ -33,6 +41,7 @@
             <input type="button" class="btn btn-success btn-sm" name="" value="I knew that!" onclick="increaseCounter()">
               <button type="button" onclick="flipCard();" name="flip" class="btn btn-info btn-sm">Flip</button>
             <input type="button" class="btn btn-danger btn-sm" name="" value="I'm unsure" onclick="decreaseCounter()">
+{#          <td><a href="{% url 'dept_emp:emp_detail' user_name=emp.user.username mobile_number=emp.emp_mobile %}">{{ emp.user.username }}</a></td>#}
           </div>
         </div>
     </div>
@@ -40,6 +49,7 @@
 
     <script src="{% static 'js/test.js' %}"></script>
       <script>
+        document.getElementById("test_score").style.visibility = "hidden";
         var len = {{ list_of_cards|length }};
         var len2 = 0;
         var incorrect = 0;
@@ -74,7 +84,14 @@
 
         function testComplete(){
             document.getElementById("test").style.visibility = "hidden";
-            displayResult();
+            var percentage = correct/len;
+            percentage = percentage *100;
+            percentage = percentage.toFixed(0);
+
+            document.getElementById("scoring").value = percentage;
+            document.getElementById("test_score").style.visibility = "visible";
+
+            {#displayResult();#}
         }
 
         function displayResult()
@@ -86,11 +103,12 @@
             if (percentage > 50.0)
             {
                 confirm("You did well,\nYour Score is: "+percentage+"%")
-                window.location.href = "http://127.0.0.1:8000/studyset/";
+                {#window.location.href = "http://127.0.0.1:8000/studyset/";#}
             }
-            else {
+            else
+            {
                 confirm("Better luck next time, Your Score is: "+percentage+"%")
-                window.location.href = "http://127.0.0.1:8000/studyset/";
+                {#window.location.href = "http://127.0.0.1:8000/studyset/";#}
             }
 
         }

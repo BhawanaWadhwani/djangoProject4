@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Deck, Card, StudySet, StudentDeck
+from .models import Deck, Card, StudySet, StudentDeck, Post, Replie
 
 
 class DeckAdmin(admin.ModelAdmin):
@@ -24,3 +24,5 @@ admin.site.register(Deck, DeckAdmin)
 admin.site.register(Card, CardAdmin)
 admin.site.register(StudySet, StudySetAdmin)
 admin.site.register(StudentDeck, StudentDeckAdmin)
+admin.site.register(Post)
+admin.site.register(Replie)

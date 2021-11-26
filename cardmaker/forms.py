@@ -9,7 +9,6 @@ class CardForm(ModelForm):
         model = Card
         fields = ('question', 'answer', 'deck')
 
-
 class DeckForm(ModelForm):
     class Meta:
         model = Deck

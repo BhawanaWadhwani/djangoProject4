@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.utils.timezone import now
 
 
 # Create your models here.
@@ -40,3 +41,23 @@ class Marks(models.Model):
     score = models.FloatField(max_length=5)
     student = models.ForeignKey(User, on_delete=models.CASCADE)
     deck = models.ForeignKey(Deck, on_delete=models.CASCADE)
+
+
+class Post(models.Model):
+    user1 = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    post_id = models.AutoField
+    post_content = models.CharField(max_length=5000)
+    timestamp = models.DateTimeField(default=now)
+    # deck = models.ForeignKey(Deck, on_delete=models.CASCADE)
+
+
+class Replie(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    reply_id = models.AutoField
+    reply_content = models.CharField(max_length=5000)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, default='')
+    timestamp = models.DateTimeField(default=now)
+    # deck = models.ForeignKey(Deck, on_delete=models.CASCADE)
+
+
+

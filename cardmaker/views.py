@@ -1,6 +1,6 @@
 # Create your views here.
 from django.shortcuts import render
-from cardmaker.models import Card, Deck, StudySet, StudentDeck, Marks
+from cardmaker.models import Card, Deck, StudySet, StudentDeck, Marks, Post, Replie
 from cardmaker.forms import CardForm, DeckForm, CardFormSet
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
@@ -116,12 +116,43 @@ def remove_from_studyset(request, studentdeck_id):
 def test(request, deck_id):
     deck = Deck.objects.get(pk=deck_id)
     c_list = Card.objects.filter(deck_id=deck)
-    context = {'list_of_cards' : c_list}
+    context = {'list_of_cards': c_list}
     return render(request, 'test_deck.html', context)
 
 
 def show_user(request):
     user = request.user.username
-    context = {'users' : user}
+    context = {'users': user}
     return render(request, 'show_settings.html', context)
 
+
+def review_subject(request, deck_id):
+    m_list = Marks.objects.all()
+    context = {'list_of_marks': m_list}
+    return render(request, 'show_my_marks.html', context)
+
+
+def forum(request):
+    if request.method == "POST":
+        user = request.user
+        content = request.POST.get('content', '')
+        post = Post(user1=user, post_content=content)
+        post.save()
+        alert = True
+        return render(request, "forum.html", {'alert': alert})
+    posts = Post.objects.filter().order_by('-timestamp')
+    return render(request, "forum.html", {'posts': posts})
+
+
+def discussion(request, myid):
+    post = Post.objects.filter(id=myid).first()
+    replies = Replie.objects.filter(post=post)
+    if request.method == "POST":
+        user = request.user
+        desc = request.POST.get('desc', '')
+        post_id = request.POST.get('post_id', '')
+        reply = Replie(user = user, reply_content = desc, post=post)
+        reply.save()
+        alert = True
+        return render(request, "discussion.html", {'alert': alert})
+    return render(request, "discussion.html", {'post': post, 'replies': replies})
