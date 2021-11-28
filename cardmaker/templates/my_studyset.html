@@ -10,9 +10,9 @@
         </div>
         <ul class="list-group-flush">
             {% for d in deck_list %}
-                <li class="list-group-item d-flex p-2">{{d.deck.title}} {{d.deck.card_set.all|length}}
+                <li class="list-group-item d-flex p-2">{{d.deck.title}}
+{#                    {{d.deck.card_set.all|length}}#}
                     <small class="text-muted ml-auto p-2">
-                        . <a href="/deck/reviews/{{d.deck.id}}">Review</a>
                         · <a href="/deck/test/{{d.deck.id}}">Test</a>
                         · <a href="/deck/rehearse/{{d.deck.id}}">Rehearse</a>
                         · <a href="/studyset/remove/{{d.id}}/">Remove</a>

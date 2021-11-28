@@ -20,7 +20,7 @@ class Deck(models.Model):
 
 class Card(models.Model):
     question = models.CharField(max_length=200)
-    answer = models.CharField(max_length=200)
+    answer = models.CharField(max_length=400)
     deck = models.ForeignKey(Deck, on_delete=models.CASCADE)
 
     def __str__(self):

@@ -147,6 +147,7 @@ def forum(request):
 def discussion(request, myid):
     post = Post.objects.filter(id=myid).first()
     replies = Replie.objects.filter(post=post)
+
     if request.method == "POST":
         user = request.user
         desc = request.POST.get('desc', '')
